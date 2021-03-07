@@ -1,11 +1,10 @@
 package jsonpath;
 
+import static io.restassured.RestAssured.given;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-
-import static io.restassured.RestAssured.*;
 
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;

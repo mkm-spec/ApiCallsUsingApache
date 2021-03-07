@@ -13,6 +13,12 @@ public class TestGetMethod {
 
 	private Response response;
 	
+	@BeforeClass
+	public static void init() {
+		RestAssured.BaseURI = "https://reqres.in/";
+		RestAssured.BasePath = "/api";
+	}
+	
 	@Test
 	@Ignore
 	public void testStatusCode() {
@@ -34,10 +40,26 @@ public class TestGetMethod {
 	}
 	
 	@Test
-	public void testGetMethod1() {
-		RestAssured.baseURI = "https://reqres.in/";
+	public void testGetMethodWithLogsAndResponseBody() {
+		
 		RestAssured.basePath = "/api/users?page=2";
 		
-		given().log().all().get().then().log().all().body("data[0].id", equalTo(7));
+		Response response = given().r
+		when().
+		get(/users?page=2);
+		
+		System.out.println(response.body().asString());
+		//given().log().all().get().then().log().all().body("data[0].id", equalTo(7));
 	}
+	
+	@Test
+	@Ignore
+	public void testUsingBasicAuthentication(String user, String pass) {
+		given().
+			authenticate(httpBuilder);
+		
+		get();
+	}
+	
+	
 }
